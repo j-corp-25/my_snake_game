@@ -1,0 +1,17 @@
+#snakeCanvas {
+    border: black solid 2px;
+    max-width: 90%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+
+
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
