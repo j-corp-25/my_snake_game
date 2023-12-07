@@ -27,7 +27,6 @@ const drawSnake = () => {
 }
 
 // we call the function
-// drawSnake()
 
 // let dx = 10
 // let dy = 0
@@ -39,9 +38,13 @@ const clearCanvas = () => {
 
 
 const moveSnake = () => {
-    const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+    const head = {x: snake[0].x + 0, y: snake[0].y - 10};
     snake.unshift(head);
     snake.pop()
 }
 
+// TODO: These 4 lines makes the snake move up on the y-axis(vertical)
+drawSnake()
+moveSnake()
+clearCanvas()
 drawSnake()
