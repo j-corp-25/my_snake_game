@@ -16,7 +16,7 @@ let snake = [
 // this is one square of the snake would look like
 const drawSnakeParts = (snakePart) => {
     ctx.fillStyle = 'lightgreen';
-    ctx.strokestyle = 'darkgreen';
+    ctx.strokeStyle = 'darkgreen';
     ctx.fillRect(snakePart.x, snakePart.y, 10,10);
     ctx.strokeRect(snakePart.x, snakePart.y, 10,10);
 }
@@ -28,23 +28,37 @@ const drawSnake = () => {
 
 // we call the function
 
-// let dx = 10
-// let dy = 0
+let dx = 10
+let dy = 0
 
 // clear the canvas to enable re-drawing
 const clearCanvas = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    ctx.strokeStyle = "black"
+    ctx.fillRect(0,0, snakeCanvas.width,snakeCanvas.height)
+    ctx.strokeRect(0,0,snakeCanvas.width,snakeCanvas.height)
 };
 
 
 const moveSnake = () => {
-    const head = {x: snake[0].x + 0, y: snake[0].y - 10};
+    const head = {x: snake[0].x + dx, y: snake[0].y + dy};
     snake.unshift(head);
     snake.pop()
 }
 
 // TODO: These 4 lines makes the snake move up on the y-axis(vertical)
-drawSnake()
-moveSnake()
-clearCanvas()
-drawSnake()
+
+
+
+// set up recursive function to keep calling the snake instead of making extra function calls
+
+const main = () => {
+    setTimeout(() => {
+        clearCanvas();
+        moveSnake();
+        drawSnake();
+        main();
+    }, 100);
+};
+
+main()
