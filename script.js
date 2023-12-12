@@ -41,9 +41,19 @@ const clearCanvas = () => {
 
 
 const moveSnake = () => {
+    let didEatFood;
+
     const head = {x: snake[0].x + dx, y: snake[0].y + dy};
     snake.unshift(head);
-    snake.pop()
+    
+
+    didEatFood = snake[0].x === foodX && snake[0].y === foodY;
+
+    if (didEatFood) {
+        createFood()
+    }else {
+        snake.pop()
+    }
 }
 
 // TODO: These 4 lines makes the snake move up on the y-axis(vertical)
@@ -55,6 +65,7 @@ const moveSnake = () => {
 const main = () => {
     setTimeout(() => {
         clearCanvas();
+        drawFood()
         moveSnake();
         drawSnake();
         main();
@@ -100,4 +111,37 @@ const changeDirection = (event) =>{
 
 }
 
+// listen for pressed down keys
 document.addEventListener("keydown",changeDirection)
+
+
+// now we need to generate the food
+
+const randomBlock = (min, max) => {
+    return Math.round((Math.random() * (max - min) + min) / 10) * 10;
+};
+
+
+let foodX;
+let foodY;
+
+const createFood = () => {
+    let foodIsOnSnake;
+    do {
+        // generate a random block for the food to be drawn
+        foodX = randomBlock(0, snakeCanvas.width - 10);
+        foodY = randomBlock(0, snakeCanvas.height - 10);
+
+
+        foodIsOnSnake = snake.some(part => part.x === foodX && part.y === foodY);
+    } while (foodIsOnSnake);
+};
+
+createFood()
+
+const drawFood = () => {
+    ctx.fillStyle = "red"
+    ctx.strokeStyle = "darkred"
+    ctx.fillRect(foodX,foodY, 10, 10)
+    ctx.strokeRect(foodX,foodY,10,10)
+}
