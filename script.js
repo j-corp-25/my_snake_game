@@ -113,7 +113,8 @@ const changeDirection = (event) => {
 };
 
 // listen for pressed down keys
-document.addEventListener("keydown", changeDirection);
+
+
 
 // now we need to generate the food
 
@@ -160,10 +161,12 @@ const didGameEnd = () => {
 
 const handleGameOver = () => {
     document.querySelector(".game-over-container").style.display = "flex";
+    document.removeEventListener("keydown",changeDirection);
 }
 
 const restartGame = () => {
     document.querySelector(".game-over-container").style.display = "none"
+    document.addEventListener("keydown", changeDirection);
     initialyzeGame();
     main()
 }
