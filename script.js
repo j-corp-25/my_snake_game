@@ -11,6 +11,7 @@ const ctx = canvas.getContext("2d");
 // this is the initial body of the snake
 const initialyzeGame = () => {
     score = 0;
+    document.querySelector(".game-over-container").style.display = "none";
     document.getElementById("score").innerHTML = score;
     snake = [
         { x: 300, y: 300 },
